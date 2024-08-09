@@ -1,6 +1,12 @@
 <html lang="en" class="h-full antialiased">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ page.data.title }} | Limette docs</title>
+    <meta
+      name="description"
+      content="Docs for Limette. Learn more about how you can get started, concepts and examples."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -154,5 +160,19 @@
     {{ include "./shared/drawer.vto" }}
 
     <script src="/assets/js/main.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-6EEESS2P5F"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-6EEESS2P5F");
+    </script>
   </body>
 </html>

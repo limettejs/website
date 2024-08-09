@@ -5,6 +5,10 @@
       "url": "/docs/getting-started/",
       "items": [
         {
+          "title": "Introduction",
+          "url": "/docs/"
+        },
+        {
           "title": "Create a project",
           "url": "/docs/getting-started/create-a-project/"
         },
@@ -25,6 +29,16 @@
         {
           "title": "Routing",
           "url": "/docs/concepts/routing/"
+        }
+      ]
+    },
+    {
+      "title": "Examples",
+      "url": "/docs/examples/",
+      "items": [
+        {
+          "title": "Modifying the &lt;head&gt;",
+          "url": "/docs/examples/modifying-the-head/"
         }
       ]
     }

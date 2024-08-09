@@ -1,5 +1,6 @@
 <html lang="en" class="h-full antialiased">
   <head>
+    <title>Limette - The framework for Deno and Web Components</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -134,15 +135,24 @@
                             <div
                               class="border-b border-r border-b-white/20 border-r-white/10 bg-white/5 px-4 py-2 text-white"
                             >
-                              NotificationSetting.jsx
+                              deno.json
                             </div>
                             <div class="border-r border-gray-600/10 px-4 py-2">
-                              App.jsx
+                              index.js
                             </div>
                           </div>
                         </div>
                         <div class="px-6 pb-14 pt-6">
-                          <!-- Your code example -->
+                          <pre
+                            class="prism-code language-javascript flex overflow-x-auto pb-6"
+                          ><code class="px-4">import { LitElement, html } from "lit";
+
+export default class App extends LitElement {
+  render() {
+    return html`&lt;div&gt;Hello World&lt;/div&gt;`;
+  }
+}
+                </code></pre>
                         </div>
                       </div>
                     </div>
@@ -223,7 +233,9 @@
                     </svg>
                     Lit
                   </dt>
-                  <dd class="mt-2">Web Components with Lit on browser.</dd>
+                  <dd class="mt-2">
+                    Web Components with Lit on browser. Fast and tiny footprint.
+                  </dd>
                 </div>
                 <div class="relative pl-9">
                   <dt class="font-semibold text-gray-900">
@@ -282,6 +294,27 @@
                   <dd class="mt-2">
                     Use Tailwind and only the CSS code used will be delivered to
                     the browser.
+                  </dd>
+                </div>
+                <div class="relative pl-9">
+                  <dt class="font-semibold text-gray-900">
+                    <svg
+                      class="absolute left-0 top-1 h-5 w-5 text-lime-500"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    Zero config required
+                  </dt>
+                  <dd class="mt-2">
+                    No need for complex configs to use TypeScript or Tailwind.
+                    Just write your code.
                   </dd>
                 </div>
               </dl>

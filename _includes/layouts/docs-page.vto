@@ -1,5 +1,6 @@
 <html lang="en" class="h-full antialiased">
   <head>
+    <title>{{ page.data.title }} | Limette docs</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -44,6 +45,10 @@
     </script>
     <div class="flex w-full flex-col">
       {{ include "./shared/header.vto" }}
+
+      {{ if page.data.url === '/docs/'}}
+      {{ include "./shared/docs-hero.vto" }}
+      {{ /if }}
 
       <div
         class="relative mx-auto flex w-full max-w-8xl flex-auto justify-center sm:px-2 lg:px-8 xl:px-12"

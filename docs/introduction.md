@@ -1,10 +1,7 @@
 ---
-layout: layouts/docs-home.vto
+layout: layouts/docs-page.vto
 url: /docs/
+title: Introduction
 ---
 
-# Welcome to my website
-
-This is my first page using **Lume,** a static site generator for Deno.
-
-I hope you enjoy it.
+Limette is a full-stack framework for Deno and Web Components.

@@ -4,8 +4,9 @@ import mdx from "lume/plugins/mdx.ts";
 import tailwindcss from "lume/plugins/tailwindcss.ts";
 import postcss from "lume/plugins/postcss.ts";
 import typographyPlugin from "npm:@tailwindcss/typography";
+import prism from "lume/plugins/prism.ts";
 
-function extractHeadings(markdown) {
+function extractHeadings(markdown: string) {
   const headingRegex = /^(##|###) (.+)$/gm;
   const headings = [];
   let match;
@@ -114,30 +115,9 @@ site.preprocess([".html"], (pages) => {
       }
     }
     page.__contentStructure = headings;
-    console.log(page);
   }
 });
 
-// site.process([".html"], (pages) => {
-//   for (const page of pages) {
-//     const headings = [];
-//     for (const heading of page.document.querySelectorAll("h2, h3")) {
-//       if (heading.nodeName === "H2") {
-//         headings.push({
-//           title: heading.textContent,
-//           url: "#" + heading.getAttribute("id"),
-//           items: [],
-//         });
-//       }
-//       if (heading.nodeName === "H3") {
-//         heading?.[headings.length - 1]?.items?.push({
-//           title: heading.textContent,
-//           url: "#" + heading.getAttribute("id"),
-//         });
-//       }
-//     }
-//     console.log("headings", headings);
-//   }
-// });
+site.use(prism());
 
 export default site;

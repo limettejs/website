@@ -26,6 +26,6 @@ jobs:
       - name: Deploy to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: limette-dev
+          project: limette
           import-map: "./deno.json"
           entrypoint: serve.ts

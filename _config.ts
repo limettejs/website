@@ -75,7 +75,7 @@ site.use(
 site.use(postcss());
 
 // Copy all image files
-site.copy([".jpg", ".gif", ".png", ".svg", ".woff2", ".js"]);
+site.copy([".jpg", ".gif", ".png", ".svg", ".ico", ".woff2", ".js"]);
 
 // Add ids to headings
 site.process([".html"], (pages) => {

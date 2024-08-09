@@ -1,5 +1,5 @@
 ---
-layout: layouts/docs-page.vto
+layout: layouts/docs.vto
 url: /docs/
 title: Introduction
 ---

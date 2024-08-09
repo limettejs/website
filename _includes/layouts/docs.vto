@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en" class="h-full antialiased">
   <head>
     <meta charset="utf-8" />
@@ -7,6 +8,29 @@
       name="description"
       content="Docs for Limette. Learn more about how you can get started, concepts and examples."
     />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@limettejs" />
+    <meta name="twitter:creator" content="@limettejs" />
+    <meta name="twitter:title" content="{{ page.data.title }} | Limette docs" />
+    <meta
+      name="twitter:description"
+      content="Docs for Limette. Learn more about how you can get started, concepts and examples."
+    />
+    <meta name="twitter:image" content="/assets/images/og.png" />
+
+    <meta property="og:title" content="{{ page.data.title }} | Limette docs" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://limette.dev" />
+    <meta property="og:image" content="/assets/images/og.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Limette" />
+    <meta
+      property="og:description"
+      content="Docs for Limette. Learn more about how you can get started, concepts and examples."
+    />
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -160,7 +184,6 @@
     {{ include "./shared/drawer.vto" }}
 
     <script src="/assets/js/main.js"></script>
-    <!-- Google tag (gtag.js) -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-6EEESS2P5F"

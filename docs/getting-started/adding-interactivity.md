@@ -55,7 +55,7 @@ import "../islands/counter.ts";
 export default class Home extends LitElement {
   render() {
     return html` <div>Home</div>
-      <island-counter></island-counter>`;
+      <is-land><island-counter></island-counter></is-land>`;
   }
 }
 ```

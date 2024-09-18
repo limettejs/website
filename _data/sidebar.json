@@ -15,6 +15,18 @@
         {
           "title": "Create a route",
           "url": "/docs/getting-started/create-a-route/"
+        },
+        {
+          "title": "Dynamic routes",
+          "url": "/docs/getting-started/dynamic-routes/"
+        },
+        {
+          "title": "Custom handlers",
+          "url": "/docs/getting-started/custom-handlers/"
+        },
+        {
+          "title": "Adding interactivity",
+          "url": "/docs/getting-started/adding-interactivity/"
         }
       ]
     },

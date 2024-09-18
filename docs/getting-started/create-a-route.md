@@ -20,4 +20,4 @@ export default class Contact extends LitElement {
 }
 ```
 
-Now, you can open the `http://localhost:3000/contact` and your page is ready.
+Now, you can open the `http://localhost:8000/contact` and your page is ready.

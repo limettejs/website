@@ -7,7 +7,7 @@ Until now, we talked about routes, which represent the static content.
 
 When you need to add interactivity to your page, you can use **islands**.
 
-Islands, just like page components, are just web components. The difference is that they are bundled and delivered to the client. They are initially server side rendered, but then are hydrated in the browser.
+Islands, just like page components, are just web components. The difference is that they are bundled and delivered to the client. They are Client-Side Rendered (CSR) by default, but they can be Server-Side Rendered (SSR) by using the `ssr`attribute.
 
 Islands can use any lifecycle callbacks.
 
@@ -54,8 +54,10 @@ import "../islands/counter.ts";
 
 export default class Home extends LitElement {
   render() {
-    return html` <div>Home</div>
-      <is-land><island-counter></island-counter></is-land>`;
+    return html` <div>
+      <island-counter></island-counter>
+      <island-counter ssr></island-counter>
+    </div>`;
   }
 }
 ```

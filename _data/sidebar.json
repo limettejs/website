@@ -41,6 +41,14 @@
         {
           "title": "Routing",
           "url": "/docs/concepts/routing/"
+        },
+        {
+          "title": "Forms",
+          "url": "/docs/concepts/forms/"
+        },
+        {
+          "title": "Static files",
+          "url": "/docs/concepts/static-files/"
         }
       ]
     },

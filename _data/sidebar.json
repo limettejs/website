@@ -59,6 +59,10 @@
         {
           "title": "Modifying the &lt;head&gt;",
           "url": "/docs/examples/modifying-the-head/"
+        },
+        {
+          "title": "Using third-party libraries",
+          "url": "/docs/examples/using-third-party-libraries/"
         }
       ]
     }

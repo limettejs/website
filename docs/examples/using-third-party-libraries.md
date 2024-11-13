@@ -56,7 +56,7 @@ If the library doesn't expose a self-registered entrypoint, you can create one i
 // /islands/button.js
 import { SlButton } from "/sl/islands/button/button.component.js";
 
-// or you can import it stright from npm
+// or you can import it directly from npm
 import { SlButton } from "npm:@shoelace-style/shoelace/dist/components/button/button.component.js";
 
 customElements.define("sl-button", SlButton);

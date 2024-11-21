@@ -49,6 +49,10 @@
         {
           "title": "Static files",
           "url": "/docs/concepts/static-files/"
+        },
+        {
+          "title": "Data fetching",
+          "url": "/docs/concepts/data-fetching/"
         }
       ]
     },

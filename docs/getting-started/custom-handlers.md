@@ -47,7 +47,7 @@ import type { Handlers } from "@limette/core";
 // Handlers
 export const handler: Handlers = {
   GET(_ctx) {
-    return return new Response(`Response for GET request!`);;
+    return new Response(`Response for GET request!`);
   },
   POST(_ctx) {
     return new Response(`Response for POST request!`);

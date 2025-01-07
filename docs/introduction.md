@@ -4,9 +4,9 @@ url: /docs/
 title: Introduction
 ---
 
-Limette is a full-stack framework for Deno and Lit (Web Components). Its main scope is to be a **light** and **fast** framework based on **Web Standards**.
+Limette is a full-stack framework for Lit (Web Components) and Deno. Its main scope is to be a **light** and **fast** framework based on **Web Standards**.
 
-Limette uses **Deno** for the server side and **Lit** on client side. This combination brings a lot of features, like:
+Limette uses **Lit** on client side and **Deno** for the server side. This combination brings a lot of features, like:
 
 - TypeScript ouf of the box
 - Web Standards

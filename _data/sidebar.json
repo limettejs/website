@@ -43,12 +43,24 @@
           "url": "/docs/concepts/routing/"
         },
         {
+          "title": "App wrapper",
+          "url": "/docs/concepts/app-wrapper/"
+        },
+        {
+          "title": "Layouts",
+          "url": "/docs/concepts/layouts/"
+        },
+        {
           "title": "Forms",
           "url": "/docs/concepts/forms/"
         },
         {
           "title": "Static files",
           "url": "/docs/concepts/static-files/"
+        },
+        {
+          "title": "Middlewares",
+          "url": "/docs/concepts/middlewares/"
         },
         {
           "title": "Data fetching",

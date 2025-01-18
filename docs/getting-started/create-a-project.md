@@ -8,7 +8,7 @@ To create a Limette project, you can use the Limette creation tool.
 Run this in your terminal:
 
 ```bash
-deno run -Ar jsr:@limette/init
+deno run -A jsr:@limette/init
 cd limette-project
 deno task start
 ```
@@ -17,4 +17,4 @@ This will create two folders:
 
 - **routes/**: This folder contains all the routes of your app. These pages are server side rendered.
 
-- **islands/**: This folder contains all the islands. These components are server side rendered and hydrated on the browser.
+- **islands/**: This folder contains all the islands. These components are client side rendered by default with the option for server side rendering and hydration on the browser.

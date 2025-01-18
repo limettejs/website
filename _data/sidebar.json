@@ -63,8 +63,16 @@
           "url": "/docs/concepts/middlewares/"
         },
         {
+          "title": "Error pages",
+          "url": "/docs/concepts/error-pages/"
+        },
+        {
           "title": "Data fetching",
           "url": "/docs/concepts/data-fetching/"
+        },
+        {
+          "title": "Configs",
+          "url": "/docs/concepts/configs/"
         }
       ]
     },

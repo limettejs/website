@@ -8,7 +8,7 @@ Data fetching on server side in Limette is done through async custom handlers. T
 ```js
 // routes/post/[id].ts
 import { LitElement, html } from "lit";
-import type { Handlers } from "@limette/core";
+import { type Handlers, ContextMixin } from "@limette/core";
 
 export const handler: Handlers = {
   async GET(ctx) {
@@ -17,7 +17,7 @@ export const handler: Handlers = {
   },
 };
 
-export default class Post extends LitElement {
+export default class Post extends ContextMixin(LitElement) {
   render() {
     return html`
       <div>

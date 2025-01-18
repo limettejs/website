@@ -8,9 +8,9 @@ A middleware it will intercept a request in order for you to execute custom logi
 ```js
 // routes/_middleware.ts
 
-export async function handler(ctx: Context, next: Function) {
+export async function handler(ctx: Context): Promise<Response> {
   // do something
-  await next();
+  return await ctx.next();
 }
 ```
 
@@ -22,13 +22,13 @@ In case you need multiple middlewares, you can export the `handler` as an array.
 // routes/_middleware.ts
 
 export const handler = [
-  async function middleware1(ctx: Context, next: Function) {
+  async function middleware1(ctx: Context): Promise<Response> {
     // do something
-    await next();
+    return await ctx.next();
   },
-  async function middleware2(ctx: Context, next: Function) {
+  async function middleware2(ctx: Context): Promise<Response> {
     // do something
-    await next();
+    return await ctx.next();
   },
 ];
 ```

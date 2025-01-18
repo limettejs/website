@@ -7,10 +7,10 @@ A layout is a regular component that acts like a wrapper shared between the rout
 
 ```js
 // routes/_layout.ts
-import { LitElement, html } from "lit";
+import { LitElement, html, type TemplateResult } from "lit";
 
 export default class Layout extends LitElement {
-  render(component) {
+  render(component: TemplateResult) {
     return html` <div class="layout">${component}</div> `;
   }
 }
@@ -22,14 +22,14 @@ Layouts are nested. If you need to disable the inheritance of a layout, you can 
 
 ```js
 // routes/_layout.ts
-import { LitElement, html } from "lit";
+import { LitElement, html, type TemplateResult } from "lit";
 
 export const config = {
   skipInheritedLayouts: true,
 };
 
 export default class Layout extends LitElement {
-  render(component) {
+  render(component: TemplateResult) {
     return html` <div class="layout">${component}</div> `;
   }
 }
@@ -39,7 +39,7 @@ If you need to disable the layout at all for a route, you can do it through the 
 
 ```js
 // routes/contact.js
-import { LitElement, html } from "lit";
+import { LitElement, html, type TemplateResult } from "lit";
 
 export const config = {
   skipInheritedLayouts: true,

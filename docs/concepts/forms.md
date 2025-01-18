@@ -16,19 +16,13 @@ import type { Handlers } from "@limette/core";
 
 export const handler: Handlers = {
   async POST(ctx) {
-    const body = ctx.req.body;
-    const form = await body.formData();
+    const form = await ctx.request.formData();
     const email = form.get("email");
 
     // Add email to list.
 
     // Redirect user to thank you page.
-    const headers = new Headers();
-    headers.set("location", "/thanks-for-subscribing");
-    return new Response(null, {
-      status: 303, // See Other
-      headers,
-    });
+    return ctx.redirect("/thanks-for-subscribing");
   },
 };
 

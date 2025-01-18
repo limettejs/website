@@ -12,8 +12,9 @@ Let's create a `/greet/[name].ts` page.
 ```js
 // routes/greet/[name].js
 import { LitElement, html } from "lit";
+import { ContextMixin } from "@limette/core";
 
-export default class Greet extends LitElement {
+export default class Greet extends ContextMixin(LitElement) {
   render() {
     return html` <div>Greetings to you, ${this.ctx.params.name}!</div> `;
   }

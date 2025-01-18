@@ -14,7 +14,7 @@ Here is an example of a page that receives some custom data from the `GET` handl
 ```js
 // routes/contact.js
 import { LitElement, html } from "lit";
-import type { Handlers } from "@limette/core";
+import { type Handlers, ContextMixin } from "@limette/core";
 
 // Handlers
 export const handler: Handlers = {
@@ -29,7 +29,7 @@ export const handler: Handlers = {
 };
 
 // Page component
-export default class Contact extends LitElement {
+export default class Contact extends ContextMixin(LitElement) {
   render() {
     console.log(this.ctx.data);
     return html` <div>Contact ${this.ctx.data.foo}</div> `;

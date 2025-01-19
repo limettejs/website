@@ -7,7 +7,7 @@ A middleware it will intercept a request in order for you to execute custom logi
 
 Limette supports customizing the `404 Not Found`, and the `500 Internal Server Error` pages. These are shown when a request is made but no matching route exists, and when a middleware, route handler, or page component throws an error respectively.
 
-An error page is represented by a `error.ts|js` file. In case of multiple error pages, the one that match better (more specific) to the request is served.
+An error page is represented by a `_error.ts|js` file. In case of multiple error pages, the one that match better (more specific) to the request is served.
 
 ```js
 // routes/_error.ts

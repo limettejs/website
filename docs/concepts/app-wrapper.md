@@ -8,10 +8,10 @@ App wrapper is the component that holds the main structure of the `<html>` page.
 ```js
 // routes/_app.ts
 import { LitElement, html } from "lit";
-import type { AppTemplateOptions } from "@limette/core";
+import type { AppWrapperOptions } from "@limette/core";
 
 export default class App extends LitElement {
-  render(app: AppTemplateOptions) {
+  render(app: AppWrapperOptions) {
     return html` <html>
       <head>
         <meta charset="utf-8" />

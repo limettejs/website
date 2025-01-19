@@ -71,6 +71,10 @@
           "url": "/docs/concepts/data-fetching/"
         },
         {
+          "title": "Context",
+          "url": "/docs/concepts/context/"
+        },
+        {
           "title": "Configs",
           "url": "/docs/concepts/configs/"
         }

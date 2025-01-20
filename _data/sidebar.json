@@ -77,6 +77,10 @@
         {
           "title": "Configs",
           "url": "/docs/concepts/configs/"
+        },
+        {
+          "title": "Tailwind",
+          "url": "/docs/concepts/tailwind/"
         }
       ]
     },

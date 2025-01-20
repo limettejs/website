@@ -32,7 +32,9 @@ function slugify(str: string) {
     .replace(/-+/g, "-"); // Remove consecutive hyphens
 }
 
-const site = lume();
+const site = lume({
+  location: new URL("https://limette.dev/"), // ← Note the path /blog/
+});
 
 site.ignore("README.md");
 

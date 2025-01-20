@@ -6,6 +6,7 @@ import tailwindcss from "lume/plugins/tailwindcss.ts";
 import postcss from "lume/plugins/postcss.ts";
 import typographyPlugin from "npm:@tailwindcss/typography";
 import prism from "lume/plugins/prism.ts";
+import basePath from "lume/plugins/base_path.ts";
 
 function extractHeadings(markdown: string) {
   const headingRegex = /^(##|###) (.+)$/gm;
@@ -37,6 +38,16 @@ const site = lume({
 });
 
 site.ignore("README.md");
+
+site.use(basePath());
+
+site.use(
+  sitemap({
+    filename: "sitemap.xml", // to change the sitemap filename
+    // query: "indexable=true", // Select only pages with the indexable attribute as true
+    sort: "date=desc", // To sort by data in ascendent order
+  })
+);
 
 site.use(jsx());
 site.use(mdx());
@@ -124,13 +135,5 @@ site.preprocess([".html"], (pages) => {
 });
 
 site.use(prism());
-
-site.use(
-  sitemap({
-    filename: "sitemap.xml", // to change the sitemap filename
-    // query: "indexable=true", // Select only pages with the indexable attribute as true
-    sort: "date=desc", // To sort by data in ascendent order
-  })
-);
 
 export default site;

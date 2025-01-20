@@ -1,6 +1,7 @@
 import lume from "lume/mod.ts";
 import jsx from "lume/plugins/jsx.ts";
 import mdx from "lume/plugins/mdx.ts";
+import sitemap from "lume/plugins/sitemap.ts";
 import tailwindcss from "lume/plugins/tailwindcss.ts";
 import postcss from "lume/plugins/postcss.ts";
 import typographyPlugin from "npm:@tailwindcss/typography";
@@ -32,6 +33,8 @@ function slugify(str: string) {
 }
 
 const site = lume();
+
+site.ignore("README.md");
 
 site.use(jsx());
 site.use(mdx());
@@ -119,5 +122,13 @@ site.preprocess([".html"], (pages) => {
 });
 
 site.use(prism());
+
+site.use(
+  sitemap({
+    filename: "sitemap.xml", // to change the sitemap filename
+    // query: "indexable=true", // Select only pages with the indexable attribute as true
+    sort: "date=desc", // To sort by data in ascendent order
+  })
+);
 
 export default site;

@@ -10,11 +10,11 @@ To create a route you can create a new file in the **routes/**.
 Let's create a `/contact` page.
 
 ```js
-// routes/contact.js
+// routes/contact.ts
 import { LitElement, html } from "lit";
 
 export default class Contact extends LitElement {
-  render() {
+  override render() {
     return html` <div>Contact page</div> `;
   }
 }

@@ -27,7 +27,7 @@ export const handler: Handlers = {
 };
 
 export default class Form extends LitElement {
-  render() {
+  override render() {
     return html`
       <form method="post">
         <input type="email" name="email" />

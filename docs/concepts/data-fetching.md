@@ -18,7 +18,7 @@ export const handler: Handlers = {
 };
 
 export default class Post extends ContextMixin(LitElement) {
-  render() {
+  override render() {
     return html`
       <div>
         <h1>${this.ctx.data.title}</h1>

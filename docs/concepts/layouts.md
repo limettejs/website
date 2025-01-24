@@ -10,7 +10,7 @@ A layout is a regular component that acts like a wrapper shared between the rout
 import { LitElement, html, type TemplateResult } from "lit";
 
 export default class Layout extends LitElement {
-  render(component: TemplateResult) {
+  override render(component: TemplateResult) {
     return html` <div class="layout">${component}</div> `;
   }
 }
@@ -29,7 +29,7 @@ export const config = {
 };
 
 export default class Layout extends LitElement {
-  render(component: TemplateResult) {
+  override render(component: TemplateResult) {
     return html` <div class="layout">${component}</div> `;
   }
 }
@@ -46,7 +46,7 @@ export const config = {
 };
 
 export default class Special extends LitElement {
-  render() {
+  override render() {
     return html` <div>Special page</div> `;
   }
 }

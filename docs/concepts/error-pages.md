@@ -15,7 +15,7 @@ import { LitElement, html } from "lit";
 import { ContextMixin } from "@limette/core";
 
 export default class ErrorPage extends ContextMixin(LitElement) {
-  render() {
+  override render() {
     if (this.ctx.error.status === 404) {
       return html`<div>Not found</div>`;
     }

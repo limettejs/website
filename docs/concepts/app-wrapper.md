@@ -11,7 +11,7 @@ import { LitElement, html } from "lit";
 import type { AppWrapperOptions } from "@limette/core";
 
 export default class App extends LitElement {
-  render(app: AppWrapperOptions) {
+  override render(app: AppWrapperOptions) {
     return html` <html>
       <head>
         <meta charset="utf-8" />

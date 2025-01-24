@@ -18,6 +18,8 @@ Islands can use any lifecycle callbacks.
 import { LitElement, html, css } from "lit";
 
 export class Counter extends LitElement {
+  declare count: number;
+
   static properties = {
     count: { type: Number },
   };
@@ -27,13 +29,13 @@ export class Counter extends LitElement {
     this.count = 0;
   }
 
-  updated(changedProperties) {
+  override updated(changedProperties) {
     if (changedProperties.has("count")) {
       console.log("Counter changed", this.count);
     }
   }
 
-  render() {
+  override render() {
     return html`
       <button type="button" @click=${() => this.count--}>-</button>
       <span>Count: ${this.count}</span>
@@ -48,12 +50,12 @@ customElements.define("island-counter", Counter);
 Now, in your route you can consume the island like this:
 
 ```js
-// routes/index.js
+// routes/index.ts
 import { LitElement, html } from "lit";
 import "../islands/counter.ts";
 
 export default class Home extends LitElement {
-  render() {
+  override render() {
     return html` <div>
       <island-counter></island-counter>
       <island-counter ssr></island-counter>

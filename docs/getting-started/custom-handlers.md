@@ -12,7 +12,7 @@ Handlers are functions in the form of `ctx => Response` or `ctx => Promise<Respo
 Here is an example of a page that receives some custom data from the `GET` handler and sets a custom header. In the same time, for the same route, on a POST request, a different response is returned.
 
 ```js
-// routes/contact.js
+// routes/contact.ts
 import { LitElement, html } from "lit";
 import { type Handlers, ContextMixin } from "@limette/core";
 
@@ -30,7 +30,7 @@ export const handler: Handlers = {
 
 // Page component
 export default class Contact extends ContextMixin(LitElement) {
-  render() {
+  override render() {
     console.log(this.ctx.data);
     return html` <div>Contact ${this.ctx.data.foo}</div> `;
   }
@@ -40,7 +40,7 @@ export default class Contact extends ContextMixin(LitElement) {
 In case you need to build an API, you don't need a page component, so you can omit it.
 
 ```js
-// routes/api/products.js
+// routes/api/products.ts
 import { LitElement, html } from "lit";
 import type { Handlers } from "@limette/core";
 

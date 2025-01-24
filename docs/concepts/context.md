@@ -27,12 +27,12 @@ export interface Context {
 To use it, you need to apply the `ContextMixin` and the context will be available on `this.ctx` property.
 
 ```js
-// routes/blog/[slug].js
+// routes/blog/[slug].ts
 import { LitElement, html } from "lit";
 import { ContextMixin } from "@limette/core";
 
 export default class Contact extends ContextMixin(LitElement) {
-  render() {
+  override render() {
     return html` <div>Post slug: ${this.ctx.params.slug}</div> `;
   }
 }
@@ -52,13 +52,13 @@ export interface ClientContext {
 To use it, you need to apply the `ContextMixin`, but imported from `@limette/core/runtime` and the context will be available on `this.ctx` property.
 
 ```js
-// islands/counter.js
+// islands/counter.ts
 import { LitElement, html } from "lit";
 import { ContextMixin } from "@limette/core/runtime";
 
 // URL: https://example.com/blog/my-post
 export default class Counter extends ContextMixin(LitElement) {
-  render() {
+  override render() {
     return html` <div>Post slug: ${this.ctx.params.slug}</div> `;
   }
 }

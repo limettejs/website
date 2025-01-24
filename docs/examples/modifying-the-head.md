@@ -8,11 +8,12 @@ To modify the the `<head>` content, you can use the app wrapper `/routes/_app.ts
 By default, it looks someting like this:
 
 ```js
+// routes/_app.ts
 import { LitElement, html } from "lit";
 import type { AppWrapperOptions } from "@limette/core";
 
 export default class App extends LitElement {
-  render(app: AppWrapperOptions) {
+  override render(app: AppWrapperOptions) {
     return html` <html>
       <head>
         <meta charset="utf-8" />
@@ -37,7 +38,7 @@ When you need to change the `<head>` section per page, you can use the `<lmt-hea
 ```js
 // routes/foo.ts
 export default class Foo extends LitElement {
-  render() {
+  override render() {
     return html`
       <lmt-head>
         <title>Foo</title>
@@ -56,7 +57,7 @@ To avoid duplicate tags, you can use the `key` attribute.
 ```js
 // routes/foo.ts
 export default class Foo extends LitElement {
-  render() {
+  override render() {
     return html`
       <lmt-head>
         <meta name="description" content="This is a description." key="description">
@@ -68,7 +69,7 @@ export default class Foo extends LitElement {
 
 // components/title.ts
 export default class Title extends LitElement {
-  render() {
+  override render() {
     return html`
       <lmt-head>
         <meta name="description" content="Other description" key="description">

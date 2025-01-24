@@ -8,11 +8,11 @@ Limette automatically serves static files from the `/static` folder in the proje
 Every static file response gets the `content-type` header based on the file extension. Limette also adds an `etag` header.
 
 ```js
-// routes/index.js
+// routes/index.ts
 import { LitElement, html } from "lit";
 
 export default class Home extends LitElement {
-  render() {
+  override render() {
     return html` <div>
       <img src="/logo.png" alt="My logo" />
     </div>`;

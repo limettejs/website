@@ -10,7 +10,7 @@ Run this in your terminal:
 ```bash
 deno run -A jsr:@limette/init
 cd limette-project
-deno task start
+deno task dev
 ```
 
 This will create two folders:

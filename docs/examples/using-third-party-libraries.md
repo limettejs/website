@@ -32,7 +32,7 @@ Add [Shoelace](https://shoelace.style/) to your project. In this example, we wil
 Now, in our route, we will import a self-registered component from Shoelace.
 
 ```js
-// /routes/index.js
+// /routes/index.ts
 import { LitElement, html } from "lit";
 
 import "/sl/islands/button/button.js";
@@ -53,7 +53,7 @@ export default class Home extends LitElement {
 If the library doesn't expose a self-registered entrypoint, you can create one in your `/islands/` folder.
 
 ```js
-// /islands/button.js
+// /islands/button.ts
 import { SlButton } from "/sl/islands/button/button.component.js";
 
 // or you can import it directly from npm
@@ -65,7 +65,7 @@ customElements.define("sl-button", SlButton);
 And then you import it in your route as usual.
 
 ```js
-// /routes/index.js
+// /routes/index.ts
 import { LitElement, html } from "lit";
 
 import "../islands/button.js";
@@ -88,7 +88,7 @@ There are cases where a Lit-based library can offer web components that don't re
 For this cases, you can use them as regular componets that are Server-Side Rendered (SSR).
 
 ```js
-// /routes/index.js
+// /routes/index.ts
 import { LitElement, html } from "lit";
 
 import "npm:@shoelace-style/shoelace/dist/components/badge/badge.js";

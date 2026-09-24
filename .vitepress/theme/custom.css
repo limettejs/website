@@ -1,0 +1,29 @@
+@font-face {
+  font-family: Lexend;
+  src: url('/assets/fonts/lexend.woff2') format('woff2');
+  font-display: swap;
+}
+
+:root {
+  --vp-c-brand-1: #4f8c25;
+  --vp-c-brand-2: #5c9a2a;
+  --vp-c-brand-3: #6db50f;
+  --vp-c-brand-soft: rgba(109, 181, 15, 0.14);
+  --vp-font-family-base: Inter, system-ui, sans-serif;
+}
+
+.dark {
+  --vp-c-brand-1: #9bd54d;
+  --vp-c-brand-2: #82c63a;
+  --vp-c-brand-3: #6db50f;
+  --vp-c-brand-soft: rgba(155, 213, 77, 0.16);
+}
+
+.VPHomeHero .name,
+.VPHomeHero .text {
+  font-family: Lexend, var(--vp-font-family-base);
+}
+
+.VPHomeHero .image-src {
+  max-width: min(100%, 360px);
+}

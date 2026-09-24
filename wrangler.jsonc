@@ -6,7 +6,7 @@
     "enabled": true
   },
   "assets": {
-    "directory": "_site"
+    "directory": ".vitepress/dist"
   },
   "compatibility_flags": [
     "nodejs_compat"

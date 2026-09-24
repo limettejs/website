@@ -2,7 +2,6 @@
   "links": [
     {
       "title": "Getting started",
-      "url": "/docs/getting-started/",
       "items": [
         {
           "title": "Introduction",
@@ -32,7 +31,6 @@
     },
     {
       "title": "Concepts",
-      "url": "/docs/concepts/",
       "items": [
         {
           "title": "Architecture",
@@ -86,7 +84,6 @@
     },
     {
       "title": "Examples",
-      "url": "/docs/examples/",
       "items": [
         {
           "title": "Modifying the &lt;head&gt;",

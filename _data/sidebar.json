@@ -29,6 +29,10 @@
           "url": "/docs/getting-started/create-a-route/"
         },
         {
+          "title": "Adding interactivity",
+          "url": "/docs/getting-started/adding-interactivity/"
+        },
+        {
           "title": "Dynamic routes",
           "url": "/docs/getting-started/dynamic-routes/"
         },
@@ -91,8 +95,8 @@
           "url": "/docs/rendering/"
         },
         {
-          "title": "Islands and hydration",
-          "url": "/docs/getting-started/adding-interactivity/"
+          "title": "Islands",
+          "url": "/docs/rendering/islands/"
         },
         {
           "title": "Head and metadata",

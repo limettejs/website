@@ -70,6 +70,6 @@ const response = await app.handler()(
 );
 ```
 
-The Deno adapter supplies Deno's request information; a Worker can pass
+The Deno adapter supplies Deno's request information; Cloudflare Workers can pass
 `{ env, ctx }`. Only read platform fields after choosing and typing the host
 value your application actually receives.

@@ -11,7 +11,7 @@ islands, with optional server rendering and hydration.
 
 The application handler is independent of its host runtime. The same core
 application can be served through the Node or Deno adapter, or called from a
-compatible Worker `fetch` handler.
+Cloudflare Workers `fetch` handler.
 
 ## Why use it?
 

@@ -3,7 +3,7 @@ import sidebar from "../_data/sidebar.json" with { type: "json" };
 
 const site = "https://limette.dev";
 const homeDescription =
-  "Limette builds applications with Lit Web Components, Vite, server-rendered pages, and interactive islands across Node, Deno, and compatible Workers.";
+  "Limette builds applications with Lit Web Components, Vite, server-rendered pages, and interactive islands across Node, Deno, and Cloudflare Workers.";
 const docsDescription =
   "Docs for Limette. Learn more about how you can get started, concepts and examples.";
 
@@ -72,6 +72,10 @@ export default defineConfig({
     },
     outline: "deep",
     docFooter: { prev: "Previous", next: "Next" },
+    footer: {
+      message: "Released under the MIT License.",
+      copyright: "Copyright © 2024-present Limette",
+    },
     search: { provider: "local" },
     socialLinks: [
       {

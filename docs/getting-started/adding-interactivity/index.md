@@ -1,16 +1,16 @@
 ---
-title: Islands and hydration
+title: Adding interactivity
 ---
 
-# Islands and hydration
+# Adding interactivity
 
-Pages and layouts generate HTML on the server. An island is a Lit component that
-Limette also loads in the browser for interaction. Register imported island
-classes in a static `islands` object on the page, layout, or application
-component. The property names are custom-element tags.
+Pages render HTML on the server. To make part of a page respond to clicks, add a
+Lit component as an **island**. The generated project already includes a counter;
+you can use the same pattern for your own component.
+
+To try a smaller version, replace the generated `islands/counter.ts` with:
 
 ```ts
-// islands/counter.ts
 import { html, LitElement } from "lit";
 
 export class Counter extends LitElement {
@@ -25,8 +25,10 @@ export class Counter extends LitElement {
 }
 ```
 
+Then replace `routes/index.ts` to import the counter, register its tag, and
+place that tag in the page:
+
 ```ts
-// routes/index.ts
 import { PageComponent } from "limette";
 import { html } from "lit";
 import { Counter } from "../islands/counter.ts";
@@ -37,26 +39,15 @@ export default class Home extends PageComponent {
   };
 
   override render() {
-    return html`
-      <h1>Home</h1>
-      <island-counter></island-counter>
-    `;
+    return html`<h1>Home</h1>
+      <island-counter></island-counter>`;
   }
 }
 ```
 
-With `ssr: true`, the counter's initial HTML is generated on the server and
-hydrated in the browser. Without `ssr: true`, the island is client rendered: the
-page contains its host element and the browser renders its contents after
-loading the island code. A shorthand definition, `'island-counter': Counter`, is
-also client rendered.
+Run `npm run dev` in the generated project and open the local URL shown by Vite.
+The response already contains **Count: 0** because `ssr: true` renders the
+counter on the server. When its browser code loads, Limette hydrates it; click
+the button to increment the count. The rest of the page stays server rendered.
 
-Limette discovers imported island classes from the static object and includes
-browser registration code. You do not call `customElements.define()` for these
-entries. Use an object literal with imported class identifiers; dynamically
-computed entries are not part of the supported discovery shape.
-
-Choose client rendering when the island has no useful initial server HTML or
-depends on browser-only APIs. Choose SSR plus hydration when its first view
-should be present in the HTML response. [Rendering modes](/docs/rendering/)
-explains how this relates to pages.
+[Learn how Islands work](/docs/rendering/islands/).

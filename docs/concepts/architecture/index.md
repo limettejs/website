@@ -23,8 +23,8 @@ app.get("/health", () => new Response("ok"));
 const response = await app.handler()(new Request("https://example.com/health"));
 ```
 
-`limette/node` and `limette/deno` adapt this handler to HTTP servers. A Worker
-can call it from `fetch(request, env, ctx)` with runtime data as the platform
+`limette/node` and `limette/deno` adapt this handler to HTTP servers. Cloudflare
+Workers can call it from `fetch(request, env, ctx)` with runtime data as the platform
 value. Neither route code nor middleware needs a Node or Deno request object.
 
 For filesystem pages, call `new App().fsRoutes()` and use the
@@ -33,5 +33,5 @@ Imperative routes can coexist with filesystem routes. The app uses the same
 handler interface after Vite builds its server entry.
 
 Pages and layouts are rendered on the server. Browser behavior belongs in
-[islands](/docs/getting-started/adding-interactivity/), which may be client-only
+[islands](/docs/rendering/islands/), which may be client-only
 or server rendered and hydrated.

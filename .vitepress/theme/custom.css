@@ -27,3 +27,83 @@
 .VPHomeHero .image-src {
   max-width: min(100%, 360px);
 }
+
+.VPHomeHero {
+  --vp-home-hero-image-background-image:
+    radial-gradient(
+      ellipse 52% 54% at 30% 30%,
+      rgba(91, 179, 67, 0.48),
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 48% 50% at 38% 72%,
+      rgba(222, 237, 80, 0.56),
+      transparent 77%
+    ),
+    radial-gradient(
+      ellipse 50% 48% at 76% 39%,
+      rgba(247, 232, 111, 0.4),
+      transparent 76%
+    ),
+    radial-gradient(
+      ellipse 54% 53% at 72% 73%,
+      rgba(67, 139, 63, 0.4),
+      transparent 78%
+    );
+  --vp-home-hero-image-filter: blur(26px);
+  overflow: clip;
+}
+
+.VPHomeHero .image-bg {
+  width: 18rem;
+  height: 18rem;
+  border-radius: 0;
+  opacity: 0.86;
+  pointer-events: none;
+}
+
+@media (min-width: 40rem) {
+  .VPHomeHero .image-bg {
+    width: 25rem;
+    height: 25rem;
+  }
+}
+
+@media (min-width: 60rem) {
+  .VPHomeHero {
+    --vp-home-hero-image-filter: blur(38px);
+  }
+
+  .VPHomeHero .image-bg {
+    width: 31rem;
+    height: 31rem;
+  }
+}
+
+.dark .VPHomeHero {
+  --vp-home-hero-image-background-image:
+    radial-gradient(
+      ellipse 52% 54% at 30% 30%,
+      rgba(85, 153, 66, 0.46),
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 48% 50% at 38% 72%,
+      rgba(153, 189, 62, 0.38),
+      transparent 77%
+    ),
+    radial-gradient(
+      ellipse 50% 48% at 76% 39%,
+      rgba(188, 190, 84, 0.23),
+      transparent 76%
+    ),
+    radial-gradient(
+      ellipse 54% 53% at 72% 73%,
+      rgba(56, 120, 62, 0.44),
+      transparent 78%
+    );
+}
+
+.dark .VPHomeHero .image-bg {
+  opacity: 0.58;
+}

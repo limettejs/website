@@ -1,7 +1,7 @@
 ---
 layout: home
 title: Limette
-titleTemplate: Lit, Vite, and Web-standard applications
+titleTemplate: Full-stack framework for Lit
 description: Limette builds applications with Lit Web Components, Vite, server-rendered pages, and interactive islands across Node, Deno, and Cloudflare Workers.
 hero:
   name: Limette

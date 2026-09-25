@@ -1,12 +1,12 @@
 ---
 layout: home
 title: Limette
-titleTemplate: The full-stack framework for Web Components
-description: Limette is a full-stack framework for Web Components (Lit) and Deno, with support for SSR, island based architecture, TypeScript and Tailwind out of the box.
+titleTemplate: Lit, Vite, and Web-standard applications
+description: Limette builds applications with Lit Web Components, Vite, server-rendered pages, and interactive islands across Node, Deno, and compatible Workers.
 hero:
   name: Limette
-  text: The framework for Web Components and Deno
-  tagline: A full-stack framework for Lit and Deno, with support for Tailwind.
+  text: Lit applications on the Web platform
+  tagline: Server-rendered pages, interactive islands, and a Request-to-Response core for Node, Deno, and Workers.
   image:
     src: /assets/images/logo.svg
     alt: Limette logo
@@ -18,20 +18,18 @@ hero:
       text: View on GitHub
       link: https://github.com/limettejs/limette
 features:
-  - title: Web Components
-    details: Build your interface with Lit and browser-native Web Components.
-  - title: Deno and TypeScript
-    details: Work with TypeScript on the server and client.
-  - title: Islands architecture
-    details: Add interactivity where your page needs it.
-  - title: Tailwind support
-    details: Style your application with Tailwind.
+  - title: Lit Web Components
+    details: Build pages, layouts, and interactive components with Lit.
+  - title: Vite development and builds
+    details: Use Vite for the development server and client and server output.
+  - title: SSR and islands
+    details: Render pages on the server and add browser interaction where needed.
+  - title: Runtime-neutral handler
+    details: Serve Web-standard Request and Response handlers on Node, Deno, or a compatible Worker.
 ---
 
-## Install Limette
+## Create a project
 
 ```sh
-deno run -A jsr:@limette/init
-cd limette-project
-deno task dev
+npm create limette@latest
 ```

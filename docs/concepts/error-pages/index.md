@@ -1,28 +1,43 @@
 ---
-title: "Error pages"
+title: Error handling
 ---
 
-# Error pages
+# Error handling
 
-A middleware it will intercept a request in order for you to execute custom logic before the route handler. Often, a middleware is used for things like authentication or logging. A middleware is a `_middleware.ts|js` file.
+Create `routes/_error.ts` to render an error page. A nested
+`routes/admin/_error.ts` handles failures in that directory's URL scope; the
+nearest matching boundary wins, with the root boundary as a fallback.
 
-Limette supports customizing the `404 Not Found`, and the `500 Internal Server Error` pages. These are shown when a request is made but no matching route exists, and when a middleware, route handler, or page component throws an error respectively.
-
-An error page is represented by a `_error.ts|js` file. In case of multiple error pages, the one that match better (more specific) to the request is served.
-
-```js
+```ts
 // routes/_error.ts
-import { LitElement, html } from "lit";
-import { ContextMixin } from "@limette/core";
+import { PageComponent } from "limette";
+import { html } from "lit";
 
-export default class ErrorPage extends ContextMixin(LitElement) {
+export default class ErrorPage extends PageComponent {
   override render() {
-    if (this.ctx.error.status === 404) {
-      return html`<div>Not found</div>`;
-    }
-    return html`<div>Server error</div> `;
+    const status = this.ctx.error?.status ?? 500;
+    return html`
+      <main>
+        <h1>${status === 404 ? "Not found" : "Request failed"}</h1>
+      </main>
+    `;
   }
 }
 ```
 
-The error pages inherit layouts as any regular page.
+`HttpError` carries an HTTP status, message, and optional response headers.
+Throw it from a handler or middleware when you want a specific status:
+
+```ts
+import { HttpError } from "limette";
+
+throw new HttpError(404, "Product not found");
+```
+
+Unmatched paths use 404; unsupported methods on a matched path use 405 and
+`Allow`. Unexpected exceptions become 500 errors. The boundary receives the
+error through `this.ctx.error`, and its rendered response uses the error status.
+Error pages render without inherited layouts. If an error page itself fails,
+Limette returns a plain 500 response.
+
+Without a matching custom error page, Limette returns a plain error response.

@@ -3,7 +3,7 @@ import sidebar from "../_data/sidebar.json" with { type: "json" };
 
 const site = "https://limette.dev";
 const homeDescription =
-  "Limette is a full-stack framework for Web Components (Lit) and Deno, with support for SSR, island based architecture, TypeScript and Tailwind out of the box.";
+  "Limette builds applications with Lit Web Components, Vite, server-rendered pages, and interactive islands across Node, Deno, and compatible Workers.";
 const docsDescription =
   "Docs for Limette. Learn more about how you can get started, concepts and examples.";
 
@@ -58,6 +58,7 @@ export default defineConfig({
     nav: [
       { text: "Home", link: "/" },
       { text: "Docs", link: "/docs/" },
+      { text: "API", link: "/docs/api/" },
       { text: "GitHub", link: "https://github.com/limettejs/limette" },
     ],
     sidebar: {

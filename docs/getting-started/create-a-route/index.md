@@ -1,24 +1,31 @@
 ---
-title: "Create a route"
+title: Create a route
 ---
 
 # Create a route
 
-To create a route you can create a new file in the **routes/**.
+Add a TypeScript or JavaScript file under `routes/`. Its default export is a
+page component. For example, `routes/contact.ts` handles `GET /contact`:
 
-## Example
+```ts
+import { PageComponent } from "limette";
+import { html } from "lit";
 
-Let's create a `/contact` page.
-
-```js
-// routes/contact.ts
-import { LitElement, html } from "lit";
-
-export default class Contact extends LitElement {
+export default class Contact extends PageComponent {
   override render() {
-    return html` <div>Contact page</div> `;
+    return html`
+      <main>
+        <h1>Contact</h1>
+      </main>
+    `;
   }
 }
 ```
 
-Now, you can open the `http://localhost:8000/contact` and your page is ready.
+The page is rendered into the document defined by `routes/_app.ts`. `render()`
+takes no arguments; a page can read its request's render context through
+`this.ctx`. A default page export provides a GET handler automatically, unless
+you define your own `handler.GET`.
+
+See [Routing](/docs/concepts/routing/) for file names and matching, and
+[Pages and layouts](/docs/concepts/layouts/) for composition.

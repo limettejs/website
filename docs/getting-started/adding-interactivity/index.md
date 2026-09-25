@@ -1,68 +1,61 @@
 ---
-title: "Adding interactivity"
+title: Islands and hydration
 ---
 
-# Adding interactivity
+# Islands and hydration
 
-Until now, we talked about routes, which represent the static content.
+Pages and layouts generate HTML on the server. An island is a Lit component that
+Limette also loads in the browser for interaction. Register imported island
+classes in a static `islands` object on the page, layout, or application
+component. The property names are custom-element tags.
 
-When you need to add interactivity to your page, you can use **islands**.
-
-Islands, just like page components, are just web components. The difference is that they are bundled and delivered to the client. They are Client-Side Rendered (CSR) by default, but they can be Server-Side Rendered (SSR) by using the `ssr`attribute.
-
-Islands can use any lifecycle callbacks.
-
-## Example
-
-```js
+```ts
 // islands/counter.ts
-import { LitElement, html, css } from "lit";
+import { html, LitElement } from "lit";
 
 export class Counter extends LitElement {
-  declare count: number;
+  static override properties = { count: { type: Number } };
+  count = 0;
 
-  static properties = {
-    count: { type: Number },
+  override render() {
+    return html`<button @click=${() =>
+      this.count++}>Count: ${this.count}</button>`;
+  }
+}
+```
+
+```ts
+// routes/index.ts
+import { PageComponent } from "limette";
+import { html } from "lit";
+import { Counter } from "../islands/counter.ts";
+
+export default class Home extends PageComponent {
+  static override islands = {
+    "island-counter": { component: Counter, ssr: true },
   };
-
-  constructor() {
-    super();
-    this.count = 0;
-  }
-
-  override updated(changedProperties) {
-    if (changedProperties.has("count")) {
-      console.log("Counter changed", this.count);
-    }
-  }
 
   override render() {
     return html`
-      <button type="button" @click=${() => this.count--}>-</button>
-      <span>Count: ${this.count}</span>
-      <button type="button" @click=${() => this.count++}>+</button>
+      <h1>Home</h1>
+      <island-counter></island-counter>
     `;
   }
 }
-
-customElements.define("island-counter", Counter);
 ```
 
-Now, in your route you can consume the island like this:
+With `ssr: true`, the counter's initial HTML is generated on the server and
+hydrated in the browser. Without `ssr: true`, the island is client rendered: the
+page contains its host element and the browser renders its contents after
+loading the island code. A shorthand definition, `'island-counter': Counter`, is
+also client rendered.
 
-```js
-// routes/index.ts
-import { LitElement, html } from "lit";
-import "../islands/counter.ts";
+Limette discovers imported island classes from the static object and includes
+browser registration code. You do not call `customElements.define()` for these
+entries. Use an object literal with imported class identifiers; dynamically
+computed entries are not part of the supported discovery shape.
 
-export default class Home extends LitElement {
-  override render() {
-    return html` <div>
-      <island-counter></island-counter>
-      <island-counter ssr></island-counter>
-    </div>`;
-  }
-}
-```
-
-Now, open `http://localhost:8000` and check how the counter is interactive.
+Choose client rendering when the island has no useful initial server HTML or
+depends on browser-only APIs. Choose SSR plus hydration when its first view
+should be present in the HTML response. [Rendering modes](/docs/rendering/)
+explains how this relates to pages.

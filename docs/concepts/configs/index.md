@@ -1,38 +1,42 @@
 ---
-title: "Configs"
+title: Configuration
 ---
 
-# Configs
+# Configuration
 
-Here are the configs available for a Limette app.
+`AppConfig` has two public options:
 
-## Server configuration
+| Option          | Default   | Effect                                          |
+| --------------- | --------- | ----------------------------------------------- |
+| `basePath`      | empty     | Prefixes registered string routes.              |
+| `trailingSlash` | `'never'` | Canonical path policy: `'never'` or `'always'`. |
 
-You can configure the server with the same options as you would do it with `Deno.serve()`
+```ts
+import { App } from "limette";
 
-```js
-type ListenOptions = Partial<Deno.ServeTcpOptions & Deno.TlsCertifiedKeyPem> & {
-  remoteAddress?: string,
-};
-
-export const app = new App();
-app.listen(options: ListenOptions);
+export const app = new App({
+  basePath: "/portal",
+  trailingSlash: "always",
+}).fsRoutes();
 ```
 
-## Build
+With this configuration, a route registered as `/about` is under
+`/portal/about/`; a request missing the trailing slash receives a 308 redirect.
+The root path is not redirected just to add or remove a slash. `app.handler()`
+handles the final request.
 
-You can configure the JavaScript version using the `target` option.
+The public Vite plugin accepts `app` (required), `routesDir` (optional, default
+`routes`), and `tailwind` (optional path to a Tailwind CSS entry):
 
-```js
-import { tailwind } from "@limette/core";
-import { Builder } from "@limette/core/dev";
-import { app } from "./main.ts";
+```ts
+import { defineConfig } from "vite";
+import { limette } from "limette/vite";
 
-const builder = new Builder({ target: ["chrome99", "firefox99", "safari15"] });
-tailwind(app);
-if (Deno.args.includes("build")) {
-  await builder.build(app);
-} else {
-  await builder.listen(app);
-}
+export default defineConfig({
+  plugins: [limette({ app: "./app.ts", routesDir: "routes" })],
+});
 ```
+
+Vite owns development and builds. Use Vite's own configuration for general Vite
+settings. Runtime server options belong to the [Node](/docs/deployment/node/) or
+[Deno](/docs/deployment/deno/) adapter.

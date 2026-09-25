@@ -1,57 +1,49 @@
 ---
-title: "Custom handlers"
+title: Route handlers
 ---
 
-# Custom handlers
+# Route handlers
 
-Routes have two parts: the page component and the handlers. Until now, we only saw the page component in action, which is the default export of a route.
+A route may export a `handler` object alongside its page. Methods return
+Web-standard `Response` objects. A GET handler can call `ctx.render()` to render
+the page:
 
-Handlers are functions in the form of `ctx => Response` or `ctx => Promise<Response>`.
-
-## Example
-
-Here is an example of a page that receives some custom data from the `GET` handler and sets a custom header. In the same time, for the same route, on a POST request, a different response is returned.
-
-```js
+```ts
 // routes/contact.ts
-import { LitElement, html } from "lit";
-import { type Handlers, ContextMixin } from "@limette/core";
+import { PageComponent, type RouteHandlers } from "limette";
+import { html } from "lit";
 
-// Handlers
-export const handler: Handlers = {
+export const handler: RouteHandlers = {
   async GET(ctx) {
-    const resp = await ctx.render({ foo: "bar" });
-    resp.headers.set("X-Custom-Header", "My custom header");
-    return resp;
+    const response = await ctx.render();
+    response.headers.set("x-page", "contact");
+    return response;
   },
-  POST(_ctx) {
-    return new Response(`Response for POST request!`);
+  POST() {
+    return new Response("Message received", { status: 201 });
   },
 };
 
-// Page component
-export default class Contact extends ContextMixin(LitElement) {
+export default class Contact extends PageComponent {
   override render() {
-    console.log(this.ctx.data);
-    return html` <div>Contact ${this.ctx.data.foo}</div> `;
+    return html`<h1>Contact</h1>`;
   }
 }
 ```
 
-In case you need to build an API, you don't need a page component, so you can omit it.
+For a response-only endpoint, omit the default page export:
 
-```js
-// routes/api/products.ts
-import { LitElement, html } from "lit";
-import type { Handlers } from "@limette/core";
+```ts
+// routes/api/health.ts
+import type { RouteHandlers } from "limette";
 
-// Handlers
-export const handler: Handlers = {
-  GET(_ctx) {
-    return new Response(`Response for GET request!`);
-  },
-  POST(_ctx) {
-    return new Response(`Response for POST request!`);
+export const handler: RouteHandlers = {
+  GET() {
+    return Response.json({ ok: true });
   },
 };
 ```
+
+`ctx.render()` is available when a route has a page component and is executing
+its handler. To pass request-local data to a page, set typed `ctx.state` before
+rendering; see [Data loading](/docs/concepts/data-fetching/).

@@ -1,32 +1,41 @@
 ---
-title: "Data fetching"
+title: Data loading
 ---
 
-# Data fetching
+# Data loading
 
-Data fetching on server side in Limette is done through async custom handlers. The custom handler can fetch any data and then can call the `ctx.render()` method with the data to be rendered as an argument. This data can then be accessed from `this.ctx.data.` property.
+Load data in a route handler or middleware, put request-specific results in
+`ctx.state`, and call `ctx.render()` to render a page. Render components read
+the state through `this.ctx.state`.
 
-```js
-// routes/post/[id].ts
-import { LitElement, html } from "lit";
-import { type Handlers, ContextMixin } from "@limette/core";
+```ts
+// routes/products/[id].ts
+import { HttpError, PageComponent, type RouteHandlers } from "limette";
+import { html } from "lit";
 
-export const handler: Handlers = {
+type State = { product?: { id: string; name: string } };
+
+async function loadProduct(id: string): Promise<State["product"]> {
+  // Replace this sample with your application's data source.
+  return { id, name: `Product ${id}` };
+}
+
+export const handler: RouteHandlers<State> = {
   async GET(ctx) {
-    const post = await db.projects.findOne({ id: ctx.params.id });
-    return ctx.render(post);
+    const product = await loadProduct(ctx.params.id);
+    if (!product) throw new HttpError(404);
+    ctx.state.product = product;
+    return ctx.render();
   },
 };
 
-export default class Post extends ContextMixin(LitElement) {
+export default class Product extends PageComponent<State> {
   override render() {
-    return html`
-      <div>
-        <h1>${this.ctx.data.title}</h1>
-      </div>
-    `;
+    return html`<h1>${this.ctx.state.product?.name}</h1>`;
   }
 }
 ```
 
-Right now, this is the only method to fetch data on server side. In the future we might add **async server components** which will let you to fetch data right from your `render()` method.
+`loadProduct` represents your own data-access function. Limette does not supply
+a database or a `ctx.data` field. When a route only needs to return JSON, its
+handler can return `Response.json(...)` without a page component.

@@ -1,47 +1,41 @@
 ---
-title: "Tailwind"
+title: Tailwind CSS
 ---
 
-# Tailwind
+# Tailwind CSS
 
-Limette has a built in plugin for [Tailwind](https://tailwindcss.com/).
+The initializer can create a Tailwind CSS v4 project. Run
+`npm create limette@latest` and choose **Tailwind CSS: Yes**. This adds
+`tailwindcss`, `@tailwindcss/vite`, `tailwind.css`, and the Vite plugin
+configuration.
 
-Limette generates a css file including Tailwind styles for every route. In order to do it, for every route it scans the page component with all the islands and _components_ imported, the [app wrapper](/docs/concepts/app-wrapper/) and the applied [layouts](/docs/concepts/layouts/) with their imported _components_.
+The generated CSS entry contains:
 
-> By _components_, we mean all the imports containing "/components/" in the path.
-
-## Enable Tailwind
-
-When you create a new project, the plugin is enabled by default. But in case you remove it and you want to enable it later, you can do it from your `./dev.ts` file.
-
-```js
-import { tailwind } from "@limette/core"; // <-- add this line
-import { Builder } from "@limette/core/dev";
-import { app } from "./main.ts";
-
-const builder = new Builder();
-tailwind(app); // <-- add this line
-if (Deno.args.includes("build")) {
-  await builder.build(app);
-} else {
-  await builder.listen(app);
-}
+```css
+@import "tailwindcss";
 ```
 
-## Disable Tailwind
+The generated Vite configuration includes both plugins:
 
-You can disable Tailwind be removing it from your `./dev.ts` file.
+```ts
+import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from "vite";
+import { limette } from "limette/vite";
 
-```js
-import { tailwind } from "@limette/core"; // <-- remove this line
-import { Builder } from "@limette/core/dev";
-import { app } from "./main.ts";
-
-const builder = new Builder();
-tailwind(app); // <-- remove this line
-if (Deno.args.includes("build")) {
-  await builder.build(app);
-} else {
-  await builder.listen(app);
-}
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+    limette({ app: "./app.ts", tailwind: "./tailwind.css" }),
+  ],
+});
 ```
+
+The Tailwind setup considers classes used by the route, its app document and
+layouts, and imported islands and components. Limette produces route-specific
+styles in development and production. Ordinary CSS imports and Lit component
+styles still work alongside Tailwind.
+
+To add Tailwind to a project created without it, install `tailwindcss` and
+`@tailwindcss/vite`, add the CSS entry above, and configure both Vite plugins as
+shown. To remove it, remove the Tailwind plugin, `tailwind` option, CSS entry,
+and dependencies.

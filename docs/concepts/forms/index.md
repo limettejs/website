@@ -1,40 +1,41 @@
 ---
-title: "Forms"
+title: Forms
 ---
 
 # Forms
 
-When it comes forms, you don't need to do anything special, Limette relies on native browser support for the HTML `<form>` element.
+Use ordinary HTML forms and the Web `Request` API. A route can render the form
+on GET and process it on POST:
 
-## POST request with `application/x-www-form-urlencoded`
+```ts
+// routes/subscribe.ts
+import { PageComponent, type RouteHandlers } from "limette";
+import { html } from "lit";
 
-By default, forms submit as a `GET` request with data encoded in the URL's search parameters, or as a `POST` request with either an `application/x-www-form-urlencoded` or `multipart/form-data` body.
-
-```js
-// routes/form.ts
-import { LitElement, html } from "lit";
-import type { Handlers } from "@limette/core";
-
-export const handler: Handlers = {
+export const handler: RouteHandlers = {
   async POST(ctx) {
     const form = await ctx.request.formData();
     const email = form.get("email");
-
-    // Add email to list.
-
-    // Redirect user to thank you page.
-    return ctx.redirect("/thanks-for-subscribing");
+    if (typeof email !== "string" || !email.includes("@")) {
+      return new Response("Invalid email", { status: 400 });
+    }
+    // Save the address with your own application code.
+    return ctx.redirect("/thanks", 303);
   },
 };
 
-export default class Form extends LitElement {
+export default class Subscribe extends PageComponent {
   override render() {
     return html`
       <form method="post">
-        <input type="email" name="email" />
-        <button type="submit">Submit</button>
+        <label>Email <input type="email" name="email" required /></label>
+        <button type="submit">Subscribe</button>
       </form>
     `;
   }
 }
 ```
+
+`request.formData()` handles form bodies using the platform API. Returning a 303
+after a successful POST sends the browser to a GET page. Define the destination
+route in your app.

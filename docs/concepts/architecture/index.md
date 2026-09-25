@@ -1,13 +1,37 @@
 ---
-title: "Architecture"
+title: Application architecture
 ---
 
-# Architecture
+# Application architecture
 
-Limette is a full-stack framework, built on **Deno** for server side and **Lit** for client side. It is designed around the [islands architecture](https://www.patterns.dev/vanilla/islands-architecture) pattern. This pattern gives a lot of flexibility for many types of apps:
+Limette's core handles Web-standard requests:
 
-- Server Side Rendered (SSR) apps
-- Hybrid apps (SSR + CSR)
-- Single Page Apps (SPA)
+```text
+Request → App.handler() → middleware → route → Response
+```
 
-Apps built with Limette should be fast. Only HTML is sent to the browser by default and JavaScript code for the interactive parts (islands).
+`App` owns configuration, middleware, and routes. `app.handler()` returns a
+runtime-neutral function that accepts a `Request` and an optional platform
+value, then returns a `Response` or a promise of one.
+
+```ts
+import { App } from "limette";
+
+const app = new App();
+app.get("/health", () => new Response("ok"));
+
+const response = await app.handler()(new Request("https://example.com/health"));
+```
+
+`limette/node` and `limette/deno` adapt this handler to HTTP servers. A Worker
+can call it from `fetch(request, env, ctx)` with runtime data as the platform
+value. Neither route code nor middleware needs a Node or Deno request object.
+
+For filesystem pages, call `new App().fsRoutes()` and use the
+[Vite plugin](/docs/getting-started/development/) to discover `routes/`.
+Imperative routes can coexist with filesystem routes. The app uses the same
+handler interface after Vite builds its server entry.
+
+Pages and layouts are rendered on the server. Browser behavior belongs in
+[islands](/docs/getting-started/adding-interactivity/), which may be client-only
+or server rendered and hydrated.

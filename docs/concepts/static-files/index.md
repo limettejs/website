@@ -1,22 +1,31 @@
 ---
-title: "Static files"
+title: CSS and static files
 ---
 
-# Static files
+# CSS and static files
 
-Limette automatically serves static files from the `/static` folder in the project root. The static files have a higher priority than routes. That means, even if a static file matches a route, the file will be served.
+The starter includes `public/` for files served without module processing. Vite
+copies them to `dist/client` during build. The generated Node and Deno launchers
+serve that directory before sending requests to the Limette handler.
 
-Every static file response gets the `content-type` header based on the file extension. Limette also adds an `etag` header.
+Put `public/logo.svg` in the project and refer to it as `/logo.svg` in a page:
 
-```js
-// routes/index.ts
-import { LitElement, html } from "lit";
+```ts
+import { PageComponent } from "limette";
+import { html } from "lit";
 
-export default class Home extends LitElement {
+export default class Home extends PageComponent {
   override render() {
-    return html` <div>
-      <img src="/logo.png" alt="My logo" />
-    </div>`;
+    return html`<img src="/logo.svg" alt="Site logo" />`;
   }
 }
 ```
+
+For CSS that belongs to application code, import a stylesheet from the
+application document, a layout, or a route. Vite emits the required assets and
+Limette adds the route's stylesheet links through `this.assets.styles` in
+`_app.ts`. Island styles can be imported from island modules. Lit's
+`static styles` remains useful for an island's shadow DOM.
+
+See [Tailwind CSS](/docs/concepts/tailwind/) for the optional utility styling
+setup.

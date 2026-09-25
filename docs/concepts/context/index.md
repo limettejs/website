@@ -1,66 +1,75 @@
 ---
-title: "Context"
+title: Context and state
 ---
 
-# Context
+# Context and state
 
-Limette offer access to a `Context` object where you get access to information about the current request.
+A route handler or middleware receives a `Context`. A page, layout, or
+application document reads a `RenderContext` through `this.ctx`. Both refer to
+the same request, but only the handler context can continue the pipeline or
+mutate request-local state.
 
-## Server Context
+| Field      | Meaning                                                                             |
+| ---------- | ----------------------------------------------------------------------------------- |
+| `request`  | Web-standard `Request`.                                                             |
+| `url`      | Parsed request `URL`.                                                               |
+| `params`   | Captured route parameters, as strings.                                              |
+| `config`   | Resolved application configuration.                                                 |
+| `platform` | Optional runtime value passed to `app.handler()`.                                   |
+| `state`    | Data shared within this request. Mutable in `Context`, readonly in `RenderContext`. |
+| `error`    | The current `HttpError` in an error boundary, otherwise `undefined`.                |
 
-On server, components get access to the full object that looks like this:
+`Context` also has `next()`, `render()`, and `redirect(location, status?)`.
+`next()` runs the next handler. `render()` renders the current page when a page
+handler is executing. `redirect()` returns a redirect `Response`; its default
+status is 302.
 
-```js
-export interface Context {
-  request: Request;
-  url: URL;
-  info: Deno.ServeHandlerInfo;
-  params: Record<string, string>;
-  config: AppConfig;
-  data?: unknown;
-  error?: HttpError;
-  next: () => Promise<Response>;
-  render: (data?: Context["data"]) => Promise<Response>;
-  redirect(path: string, status?: number): Response;
-}
-```
+## Pass data to a page
 
-To use it, you need to apply the `ContextMixin` and the context will be available on `this.ctx` property.
+```ts
+// routes/products/[id].ts
+import { PageComponent, type RouteHandlers } from "limette";
+import { html } from "lit";
 
-```js
-// routes/blog/[slug].ts
-import { LitElement, html } from "lit";
-import { ContextMixin } from "@limette/core";
+type State = { productName?: string };
 
-export default class Contact extends ContextMixin(LitElement) {
+export const handler: RouteHandlers<State> = {
+  async GET(ctx) {
+    ctx.state.productName = `Product ${ctx.params.id}`;
+    return ctx.render();
+  },
+};
+
+export default class Product extends PageComponent<State> {
   override render() {
-    return html` <div>Post slug: ${this.ctx.params.slug}</div> `;
+    return html`<h1>${this.ctx.state.productName}</h1>`;
   }
 }
 ```
 
-## Client Context
+State starts as a new object for each request. Render components see it as
+readonly. Params are also request-local; optional or catch-all params absent
+from a URL have the empty string value. Invalid percent encoding yields a 400
+response.
 
-Islands (client components) get access to a lighter `ClientContext` that looks like this:
+## Platform values
 
-```js
-export interface ClientContext {
-  url: URL;
-  params: Record<string, string>;
-}
+`App<State, Platform>` lets you describe host-specific information while keeping
+the request handler runtime-neutral:
+
+```ts
+import { App } from "limette";
+
+type Platform = { requestId: string };
+const app = new App<Record<string, unknown>, Platform>();
+app.get("/request-id", (ctx) => new Response(ctx.platform.requestId));
+
+const response = await app.handler()(
+  new Request("https://example.com/request-id"),
+  { requestId: "req-123" },
+);
 ```
 
-To use it, you need to apply the `ContextMixin`, but imported from `@limette/core/runtime` and the context will be available on `this.ctx` property.
-
-```js
-// islands/counter.ts
-import { LitElement, html } from "lit";
-import { ContextMixin } from "@limette/core/runtime";
-
-// URL: https://example.com/blog/my-post
-export default class Counter extends ContextMixin(LitElement) {
-  override render() {
-    return html` <div>Post slug: ${this.ctx.params.slug}</div> `;
-  }
-}
-```
+The Deno adapter supplies Deno's request information; a Worker can pass
+`{ env, ctx }`. Only read platform fields after choosing and typing the host
+value your application actually receives.

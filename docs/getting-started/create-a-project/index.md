@@ -1,21 +1,39 @@
 ---
-title: "Create a project"
+title: Create a project
 ---
 
 # Create a project
 
-To create a Limette project, you can use the Limette creation tool.
+Run the initializer from Node/npm:
 
-Run this in your terminal:
+```sh
+npm create limette@latest
+```
 
-```bash
-deno run -A jsr:@limette/init
-cd limette-project
+Enter a project name, then choose a runtime (**Deno** or **Node**) and whether
+to include **Tailwind CSS**. The initializer defaults to Deno and Tailwind if
+you accept the prompts. It installs dependencies with the selected runtime's
+package manager.
+
+The creation command itself runs through Node/npm. A generated Deno application
+uses Deno for development and serving; a Node application uses Node/npm.
+
+::: code-group
+
+```sh [Node project]
+cd my-app
+npm run dev
+```
+
+```sh [Deno project]
+cd my-app
 deno task dev
 ```
 
-This will create two folders:
+:::
 
-- **routes/**: This folder contains all the routes of your app. These pages are server side rendered.
+The development server is provided by Vite. Open the local URL it prints. The
+starter includes a home page, a second page, and an interactive counter island.
 
-- **islands/**: This folder contains all the islands. These components are client side rendered by default with the option for server side rendering and hydration on the browser.
+See [Project structure](/docs/getting-started/project-structure/) for the files
+the initializer creates.

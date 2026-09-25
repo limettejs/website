@@ -1,54 +1,46 @@
 ---
-title: "Layouts"
+title: Pages and layouts
 ---
 
-# Layouts
+# Pages and layouts
 
-A layout is a regular component that acts like a wrapper shared between the routes in the same folder. An example of a layout would be the app shell of an app. A layout is a `_layout.ts|js` file.
+A route's default export extends `PageComponent`. A `_layout.ts` file wraps
+routes in its directory and descendants. Both render through Lit; `render()`
+takes no arguments, and the layout inserts `this.outlet`.
 
-```js
-// routes/_layout.ts
-import { LitElement, html, type TemplateResult } from "lit";
+```ts
+// routes/dashboard/_layout.ts
+import { LayoutComponent } from "limette";
+import { html } from "lit";
 
-export default class Layout extends LitElement {
-  override render(component: TemplateResult) {
-    return html` <div class="layout">${component}</div> `;
-  }
-}
-```
-
-## Inheritence
-
-Layouts are nested. If you need to disable the inheritance of a layout, you can do it like this:
-
-```js
-// routes/_layout.ts
-import { LitElement, html, type TemplateResult } from "lit";
-
-export const config = {
-  skipInheritedLayouts: true,
-};
-
-export default class Layout extends LitElement {
-  override render(component: TemplateResult) {
-    return html` <div class="layout">${component}</div> `;
-  }
-}
-```
-
-If you need to disable the layout at all for a route, you can do it through the route's config.
-
-```js
-// routes/contact.js
-import { LitElement, html, type TemplateResult } from "lit";
-
-export const config = {
-  skipInheritedLayouts: true,
-};
-
-export default class Special extends LitElement {
+export default class DashboardLayout extends LayoutComponent {
   override render() {
-    return html` <div>Special page</div> `;
+    return html`<div class="dashboard"><nav>Dashboard</nav>${this.outlet}</div>`;
   }
 }
 ```
+
+```ts
+// routes/dashboard/index.ts
+import { PageComponent } from "limette";
+import { html } from "lit";
+
+export default class Dashboard extends PageComponent {
+  override render() {
+    return html`
+      <main>
+        <h1>Dashboard</h1>
+      </main>
+    `;
+  }
+}
+```
+
+Layouts nest from the route root toward the page. A layout can opt out of parent
+layouts with `export const config = { skipInheritedLayouts: true }`; a page can
+use the same setting to skip its inherited layouts entirely. These are
+filesystem module settings, distinct from `AppConfig`.
+
+App, layout, and page components can provide a `head()` contribution. Their
+server-rendered structures use light DOM. Interactive islands are ordinary Lit
+components and may use their own shadow DOM.

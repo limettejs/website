@@ -1,88 +1,40 @@
 ---
-title: "Modifying the <head>"
+title: Head and metadata
 ---
 
-# Modifying the `<head>`
+# Head and metadata
 
-To modify the the `<head>` content, you can use the app wrapper `/routes/_app.ts`.
+`AppComponent`, `LayoutComponent`, and `PageComponent` can return Lit templates
+from `head()`. Limette combines their contributions into the document's
+`<head>`. Put document-wide defaults in `routes/_app.ts`, and page-specific
+values on the page.
 
-By default, it looks someting like this:
+```ts
+// routes/products/[id].ts
+import { PageComponent } from "limette";
+import { html } from "lit";
 
-```js
-// routes/_app.ts
-import { LitElement, html } from "lit";
-import type { AppWrapperOptions } from "@limette/core";
+export default class Product extends PageComponent {
+  override head() {
+    return html`
+      <title>Product ${this.ctx.params.id}</title>
+      <meta name="description" content="Product details" />
+      <link rel="canonical" href=${this.ctx.url.href} />
+    `;
+  }
 
-export default class App extends LitElement {
-  override render(app: AppWrapperOptions) {
-    return html` <html>
-      <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Limette</title>
-        ${app.css}
-      </head>
-      <body>
-        ${app.component} ${app.js}
-      </body>
-    </html>`;
+  override render() {
+    return html`<h1>Product ${this.ctx.params.id}</h1>`;
   }
 }
 ```
 
-You can add whatever you need in the `<head>` section.
+A page can also contribute Open Graph or other standard meta tags through
+`head()`. Limette merges common tags such as titles, named meta tags, and
+canonical links so page-specific entries can replace application defaults. The
+`key` attribute can identify an entry explicitly when needed; it is removed from
+the final HTML.
 
-## Modify the head per page
-
-When you need to change the `<head>` section per page, you can use the `<lmt-head>` component like this.
-
-```js
-// routes/foo.ts
-export default class Foo extends LitElement {
-  override render() {
-    return html`
-      <lmt-head>
-        <title>Foo</title>
-        <meta name="description" content="Your description for the foo page." />
-      </lmt-head>
-      <div>Your content</div>
-    `;
-  }
-}
-```
-
-All the `<lmt-head>`'s tags are injected to the `<head>` section.
-
-To avoid duplicate tags, you can use the `key` attribute.
-
-```js
-// routes/foo.ts
-export default class Foo extends LitElement {
-  override render() {
-    return html`
-      <lmt-head>
-        <meta name="description" content="This is a description." key="description">
-      </lmt-head>
-      <div>Your page</div>
-    `;
-  }
-}
-
-// components/title.ts
-export default class Title extends LitElement {
-  override render() {
-    return html`
-      <lmt-head>
-        <meta name="description" content="Other description" key="description">
-      </lmt-head>
-      <div>Your component</div>
-    `;
-  }
-}
-```
-
-The rendered page will only include `<meta>`-tag with "Other description".
-
-When merging tags with the same key, the last one found in the DOM will be the one injected in the `<head>`.
-
-The `<title>`-tag is automatically deduplicated, even without a key prop.
+Keep the document's charset, viewport, `${this.assets.styles}`, and
+`${this.assets.scripts}` in `_app.ts` as shown in the
+[application document](/docs/concepts/app-wrapper/).

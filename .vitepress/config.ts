@@ -81,6 +81,17 @@ export default defineConfig({
       {
         icon: "github",
         link: "https://github.com/limettejs/limette",
+        ariaLabel: "GitHub",
+      },
+      {
+        icon: "discord",
+        link: "https://discord.gg/wKTkSbv8F6",
+        ariaLabel: "Discord",
+      },
+      {
+        icon: "bluesky",
+        link: "https://bsky.app/profile/limette.dev",
+        ariaLabel: "Bluesky",
       },
     ],
   },

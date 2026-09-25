@@ -4,11 +4,19 @@ title: Create a project
 
 # Create a project
 
-Run the initializer from Node/npm:
+Run the initializer from npm or Deno:
 
-```sh
+::: code-group
+
+```sh [Node]
 npm create limette@latest
 ```
+
+```sh [Deno]
+deno run -A npm:create-limette@latest
+```
+
+:::
 
 Enter a project name, then choose a runtime (**Deno** or **Node**) and whether
 to include **Tailwind CSS**. The initializer defaults to Deno and Tailwind if

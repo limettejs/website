@@ -1,5 +1,8 @@
 _site
 _cache
+.vitepress/dist
+.vitepress/cache
+node_modules
 .DS_Store
 
 # wrangler files

@@ -1,100 +1,154 @@
 {
   "links": [
     {
-      "title": "Getting started",
-      "url": "/docs/getting-started/",
+      "title": "Introduction",
       "items": [
         {
-          "title": "Introduction",
+          "title": "What is Limette?",
           "url": "/docs/"
-        },
+        }
+      ]
+    },
+    {
+      "title": "Getting started",
+      "items": [
         {
           "title": "Create a project",
           "url": "/docs/getting-started/create-a-project/"
+        },
+        {
+          "title": "Project structure",
+          "url": "/docs/getting-started/project-structure/"
+        },
+        {
+          "title": "Development and production",
+          "url": "/docs/getting-started/development/"
         },
         {
           "title": "Create a route",
           "url": "/docs/getting-started/create-a-route/"
         },
         {
+          "title": "Adding interactivity",
+          "url": "/docs/getting-started/adding-interactivity/"
+        },
+        {
           "title": "Dynamic routes",
           "url": "/docs/getting-started/dynamic-routes/"
         },
         {
-          "title": "Custom handlers",
+          "title": "Route handlers",
           "url": "/docs/getting-started/custom-handlers/"
-        },
-        {
-          "title": "Adding interactivity",
-          "url": "/docs/getting-started/adding-interactivity/"
         }
       ]
     },
     {
-      "title": "Concepts",
-      "url": "/docs/concepts/",
+      "title": "Core concepts",
       "items": [
         {
-          "title": "Architecture",
+          "title": "Application architecture",
           "url": "/docs/concepts/architecture/"
+        },
+        {
+          "title": "Application document",
+          "url": "/docs/concepts/app-wrapper/"
+        },
+        {
+          "title": "Pages and layouts",
+          "url": "/docs/concepts/layouts/"
         },
         {
           "title": "Routing",
           "url": "/docs/concepts/routing/"
         },
         {
-          "title": "App wrapper",
-          "url": "/docs/concepts/app-wrapper/"
+          "title": "Middleware",
+          "url": "/docs/concepts/middlewares/"
         },
         {
-          "title": "Layouts",
-          "url": "/docs/concepts/layouts/"
+          "title": "Context and state",
+          "url": "/docs/concepts/context/"
+        },
+        {
+          "title": "Data loading",
+          "url": "/docs/concepts/data-fetching/"
+        },
+        {
+          "title": "Error handling",
+          "url": "/docs/concepts/error-pages/"
         },
         {
           "title": "Forms",
           "url": "/docs/concepts/forms/"
         },
         {
-          "title": "Static files",
+          "title": "Configuration",
+          "url": "/docs/concepts/configs/"
+        }
+      ]
+    },
+    {
+      "title": "Rendering",
+      "items": [
+        {
+          "title": "Rendering modes",
+          "url": "/docs/rendering/"
+        },
+        {
+          "title": "Islands",
+          "url": "/docs/rendering/islands/"
+        },
+        {
+          "title": "Head and metadata",
+          "url": "/docs/examples/modifying-the-head/"
+        }
+      ]
+    },
+    {
+      "title": "Styling and assets",
+      "items": [
+        {
+          "title": "CSS and static files",
           "url": "/docs/concepts/static-files/"
         },
         {
-          "title": "Middlewares",
-          "url": "/docs/concepts/middlewares/"
-        },
-        {
-          "title": "Error pages",
-          "url": "/docs/concepts/error-pages/"
-        },
-        {
-          "title": "Data fetching",
-          "url": "/docs/concepts/data-fetching/"
-        },
-        {
-          "title": "Context",
-          "url": "/docs/concepts/context/"
-        },
-        {
-          "title": "Configs",
-          "url": "/docs/concepts/configs/"
-        },
-        {
-          "title": "Tailwind",
+          "title": "Tailwind CSS",
           "url": "/docs/concepts/tailwind/"
         }
       ]
     },
     {
-      "title": "Examples",
-      "url": "/docs/examples/",
+      "title": "Deployment",
       "items": [
         {
-          "title": "Modifying the &lt;head&gt;",
-          "url": "/docs/examples/modifying-the-head/"
+          "title": "Node",
+          "url": "/docs/deployment/node/"
         },
         {
-          "title": "Using third-party libraries",
+          "title": "Deno",
+          "url": "/docs/deployment/deno/"
+        },
+        {
+          "title": "Cloudflare Workers",
+          "url": "/docs/deployment/cloudflare/"
+        }
+      ]
+    },
+    {
+      "title": "Examples",
+      "items": [
+        {
+          "title": "Web Component libraries",
           "url": "/docs/examples/using-third-party-libraries/"
+        }
+      ]
+    },
+    {
+      "title": "API reference",
+      "items": [
+        {
+          "title": "Public API",
+          "url": "/docs/api/"
         }
       ]
     }

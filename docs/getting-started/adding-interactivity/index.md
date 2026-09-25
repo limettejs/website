@@ -18,8 +18,9 @@ export class Counter extends LitElement {
   count = 0;
 
   override render() {
-    return html`<button @click=${() =>
-      this.count++}>Count: ${this.count}</button>`;
+    return html`<button @click=${() => this.count++}>
+      Count: ${this.count}
+    </button>`;
   }
 }
 ```

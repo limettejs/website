@@ -15,7 +15,10 @@ import { html } from "lit";
 
 export default class DashboardLayout extends LayoutComponent {
   override render() {
-    return html`<div class="dashboard"><nav>Dashboard</nav>${this.outlet}</div>`;
+    return html`<div class="dashboard">
+      <nav>Dashboard</nav>
+      ${this.outlet}
+    </div>`;
   }
 }
 ```

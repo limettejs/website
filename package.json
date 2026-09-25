@@ -1,0 +1,27 @@
+{
+  "name": "limette-docs",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "check": "tsc --noEmit",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "devDependencies": {
+    "oxfmt": "0.70.0",
+    "typescript": "6.0.3",
+    "vitepress": "2.0.0-alpha.20",
+    "vue": "3.5.43",
+    "wrangler": "4.135.0"
+  },
+  "overrides": {
+    "vite": "8.3.0"
+  }
+}

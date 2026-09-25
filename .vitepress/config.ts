@@ -20,10 +20,13 @@ export default defineConfig({
     ["meta", { name: "twitter:card", content: "summary_large_image" }],
     ["meta", { name: "twitter:site", content: "@limettejs" }],
     ["meta", { name: "twitter:creator", content: "@limettejs" }],
-    ["script", {
-      async: "",
-      src: "https://www.googletagmanager.com/gtag/js?id=G-6EEESS2P5F",
-    }],
+    [
+      "script",
+      {
+        async: "",
+        src: "https://www.googletagmanager.com/gtag/js?id=G-6EEESS2P5F",
+      },
+    ],
     [
       "script",
       {},
@@ -70,9 +73,11 @@ export default defineConfig({
     outline: "deep",
     docFooter: { prev: "Previous", next: "Next" },
     search: { provider: "local" },
-    socialLinks: [{
-      icon: "github",
-      link: "https://github.com/limettejs/limette",
-    }],
+    socialLinks: [
+      {
+        icon: "github",
+        link: "https://github.com/limettejs/limette",
+      },
+    ],
   },
 });

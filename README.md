@@ -5,23 +5,30 @@ Documentation website for [Limette](https://limette.dev), built with VitePress
 
 ## Develop
 
-Install dependencies with Deno, then use the documentation tasks:
+Use Node.js 22.12 or later. Install dependencies and start the development
+server:
 
 ```sh
-deno install --frozen-lockfile
-deno task docs:dev
-deno task docs:build
-deno task docs:preview
+npm install
+npm run dev
 ```
 
-The tasks run the Deno-managed VitePress dependency with Node. The build writes
-to `.vitepress/dist`. The existing `build` and `serve` task names remain as
-aliases for deployment and local development.
+For production validation, formatting, and type checking:
+
+```sh
+npm run build
+npm run preview
+npm run check
+npm run format:check
+```
+
+Run `npm run format` to format source files. The build writes to
+`.vitepress/dist`.
 
 ## Deployment
 
 `wrangler.jsonc` keeps the existing `limette-dev` Cloudflare deployment and
-serves the static files from `.vitepress/dist`. The build command remains
-`deno task build`; run it before the existing Wrangler deployment process. The
-production domain is `https://limette.dev/`; no base path or environment
-variables are configured in this repository.
+serves the static files from `.vitepress/dist`. The build command is
+`npm run build`; `npm run deploy` builds and then invokes the locally installed
+Wrangler CLI. The production domain is `https://limette.dev/`; no base path or
+environment variables are configured in this repository.
